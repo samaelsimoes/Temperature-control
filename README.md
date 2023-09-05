@@ -1,42 +1,45 @@
+Dashboard de Controle de Temperatura
+Este é um projeto de dashboard desenvolvido em Angular 2+ para monitorar a temperatura de servidores e chuveiros.
 
-## Versions
+Screenshot
 
-[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/html-logo.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/material-dashboard)
-[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/angular-logo.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/material-dashboard-angular2)
-[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/vue-logo.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/vue-material-dashboard)
-[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/react-logo.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/material-dashboard-react)
+Instalação
+Siga estas etapas para configurar o projeto em seu ambiente local:
 
-| HTML | Angular | Vue | React |
-| --- | --- | --- | --- |
-| [![Material Dashboard HTML](https://github.com/creativetimofficial/public-assets/blob/master/material-dashboard-html/material-dashboard.jpg?raw=true)](https://www.creative-tim.com/product/material-dashboard) | [![Material Dashboard Angular](https://github.com/creativetimofficial/public-assets/blob/master/material-dashboard-angular/material-dashboard-angular.jpg?raw=true)](https://www.creative-tim.com/product/material-dashboard-angular2) | [![Vue Material Dashboard ](https://github.com/creativetimofficial/public-assets/blob/master/vue-material-dashboard/vue-material-dashboard.jpg?raw=true)](https://www.creative-tim.com/product/vue-material-dashboard) | [![Material Dashboard React](https://github.com/creativetimofficial/public-assets/blob/master/material-dashboard-react/material-dashboard-react.jpg?raw=true)](https://www.creative-tim.com/product/material-dashboard-react)
+Pré-requisitos: Certifique-se de que você tenha o Node.js e o Angular CLI instalados em sua máquina. Se não tiver, você pode baixá-los em nodejs.org e angular.io.
 
-## Demo
+Clone o repositório: Use o Git para clonar este repositório em sua máquina local.
 
-| Dashboard | User Profile | Tables | Icons | Notifications |
-| --- | --- | --- | --- | --- |
-| [![Start page](https://raw.githubusercontent.com/creativetimofficial/public-assets/master/material-dashboard-angular/dashboard.png?raw=true)](https://demos.creative-tim.com/material-dashboard-angular2/#/dashboard) | [![User profile page](https://raw.githubusercontent.com/creativetimofficial/public-assets/master/material-dashboard-angular/user-profile.png?raw=true)](https://demos.creative-tim.com/material-dashboard-angular2/#/user-profile) | [![Tables page ](https://raw.githubusercontent.com/creativetimofficial/public-assets/master/material-dashboard-angular/tables.png?raw=true)](https://demos.creative-tim.com/material-dashboard-angular2/#/) | [![Icons Page](https://raw.githubusercontent.com/creativetimofficial/public-assets/master/material-dashboard-angular/icons.png?raw=true)](https://demos.creative-tim.com/material-dashboard-angular2/#/maps) | [![Notifications page](https://raw.githubusercontent.com/creativetimofficial/public-assets/master/material-dashboard-angular/notifications.png?raw=true)](https://demos.creative-tim.com/material-dashboard-angular2/#/notifications)
+bash
+Copy code
+git clone https://github.com/seu-usuario/seu-projeto.git
+cd seu-projeto
+Instale as dependências: Execute o seguinte comando para instalar as dependências do projeto.
 
-[View More](https://demos.creative-tim.com/material-dashboard-angular2/#/dashboard).
+bash
+Copy code
+npm install
+Uso
+Após concluir a instalação, você pode iniciar o servidor de desenvolvimento local com o Angular CLI. Isso permitirá que você visualize o dashboard em seu navegador.
 
-## Quick start
+bash
+Copy code
+ng serve
+Acesse o dashboard em seu navegador em http://localhost:4200.
 
-Quick start options:
-## Terminal Commands
+Funcionalidades
+Gráfico de Temperatura: Visualize a temperatura dos servidores e chuveiros em tempo real por meio de um gráfico interativo.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0 and angular 4.x.
+Controle de Temperatura: Controle a temperatura dos servidores e chuveiros diretamente através do dashboard.
 
-1. Install NodeJs from [NodeJs Official Page](https://nodejs.org/en).
-2. Open Terminal
-3. Go to your file project
-4. Make sure you have installed [Angular CLI](https://github.com/angular/angular-cli) already. If not, please install.
-5. Run in terminal: ```npm install```
-6. Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Contribuições
+Sinta-se à vontade para contribuir para este projeto. Abra um "Pull Request" com suas melhorias, correções de bugs ou novas funcionalidades.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Licença
+Este projeto está licenciado sob a Licença MIT - veja o arquivo LICENSE para detalhes.
 
-### What's included
-
-Within the download you'll find the following directories and files:
+Certifique-se de substituir seu-usuario e seu-projeto pelos detalhes reais do seu repositório. Esta é apenas uma documentação básica, você pode adicionar mais detalhes, imagens, ou qualquer outra informação relevante ao seu projeto. Lembre-se de manter a documentação atualizada à medida que o projeto evolui.
+![image](https://github.com/samaelsimoes/Temperature-control/assets/29442511/14c14188-fd36-46fa-9714-1cf489ac92b2)
 
 ```
 material-dashboard-angular
