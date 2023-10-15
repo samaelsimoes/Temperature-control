@@ -75,7 +75,13 @@ material-dashboard-angular
 │   │   ├── home  
 │   │   ├──Dashboard  
 │   │   │   ├── cards
-│   │   │   │     ├──
+│   │   │   │     ├── cards.component.html
+│   │   │   │     ├── cards.component.html
+│   │   │   │     ├── cards.component.html
+│   │   │   ├── graphic
+│   │   │   │     ├── graphic.component.html
+│   │   │   │     ├── graphic.component.html
+│   │   │   │     ├── graphic.component.html
 │   │   │   ├── chuveiro
 │   │   │   │     ├──
 │   │   │   ├── components
