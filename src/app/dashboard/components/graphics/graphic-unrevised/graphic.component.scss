@@ -1,0 +1,24 @@
+/* Estilo para ocultar os ícones por padrão */
+.chart-icons {
+    position: relative;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    transition: opacity 0.5s, top 0.5s;
+  }
+  
+  /* Estilo para fazer a transição do card-header quando o mouse passa sobre ele */
+  #card-header:hover {
+    transform: translateY(-10px);
+  }
+  
+  /* Estilo para mostrar os ícones quando o mouse está sobre #card-header */
+  #card-header:hover .chart-icons {
+    opacity: 1;
+    top: 70px; /* Ajuste a altura desejada para posicionar os ícones */
+  }
+  .style-icon-load-edit {
+    color: #726a6a;
+  }

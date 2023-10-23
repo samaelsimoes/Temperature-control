@@ -6,16 +6,50 @@ import * as Chartist from 'chartist';
   styleUrls: ['./data-centers.component.scss']
 })
 export class DataCentersComponent implements OnInit {
-  paramDataCenter = [];
-  paramNormalDays = [];
-  paramTemperatureIncidents = [];
+  paramDataCenter;
+  paramNormalDays;
+  paramTemperatureIncidents;
+  paramGraphicDiario;
+  paramGastosImprevistos = [];
 
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
-    this.paramNormalDays = [
+    this.paramDataCenter = [];
+    this.paramNormalDays = [];
+    this.paramTemperatureIncidents = [];
+
+    this.paramGraphicDiario = [
       {
         high: 1000,
+        labels: ['13/10/23', '14/10/23', '15/10/23', '16/10/23', '17/10/23', '18/10/23', '19/10/23', '20/10/23'],
+        series: [
+          [10, 14, 17, 22, 55, 15, 10, 20]
+        ],
+        title: 'Consumo mensal',
+        icon: 'access_time',
+        desc: 'valores por semana'
+      }
+    ]
+
+    this.paramGastosImprevistos = [
+      {
+        high: 1000,
+        labels: ['13/10/23', '14/10/23', '15/10/23', '16/10/23', '17/10/23', '18/10/23', '19/10/23', '20/10/23'],
+        series: [
+          [200, 5, 5, 55, 78, 5, 10, 20]
+        ],
+        title: 'Gastos previstos',
+        icon: 'access_time',
+        desc: 'valores por semana'
+      }
+    ]
+
+    this.paramNormalDays = [
+      {
+        high: 400,
         labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
         series: [
           [12, 17, 7, 17, 23, 18, 38]
@@ -28,7 +62,7 @@ export class DataCentersComponent implements OnInit {
 
     this.paramTemperatureIncidents = [
       {
-        high: 1000,
+        high: 400,
         labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a'],
         series: [
           [230, 750, 450, 300, 280, 240, 200, 190]

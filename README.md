@@ -42,7 +42,6 @@ Certifique-se de substituir seu-usuario e seu-projeto pelos detalhes reais do se
 ![image](https://github.com/samaelsimoes/Temperature-control/assets/29442511/14c14188-fd36-46fa-9714-1cf489ac92b2)
 
 ```
-material-dashboard-angular
 ├── CHANGELOG.md
 ├── LICENSE.md
 ├── README.md

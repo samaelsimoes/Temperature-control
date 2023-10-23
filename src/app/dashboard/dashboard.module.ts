@@ -18,7 +18,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import { DataCentersComponent } from './data-centers/data-centers.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { GraphicComponent } from './graphic/graphic.component';
+import { GraphicSuccessComponent } from './components/graphics/graphic-dailys/graphic-success.component';
+import { GraphicComponent } from './components/graphics/graphic-unrevised/graphic.component';
 
 const routes: Routes = [
     {
@@ -58,6 +59,7 @@ const routes: Routes = [
         IconsComponent,
         NotificationsComponent,
         IndexDashboardComponent,
+        GraphicSuccessComponent,
     ],
     imports: [
         CommonModule,

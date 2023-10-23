@@ -3,15 +3,18 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <app-cards [dataCenterInfo]="paramDataCenter"></app-cards>
+
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <app-graphic [param]="paramNormalDays" ></app-graphic>
+                <app-graphic-success [param]="paramGraphicDiario"> </app-graphic-success>
             </div>
+
             <div class="col-md-6">
-                <app-graphic [param]="paramTemperatureIncidents" ></app-graphic>
+               <app-graphic-danger [param]="paramGastosImprevistos"> </app-graphic-danger>
             </div>
+
         </div>
     </div>
 </div>

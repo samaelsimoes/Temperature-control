@@ -9,7 +9,7 @@ declare interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-  { path: '/dashboard', title: 'Servidor', icon: 'cloud', class: '' },
+  { path: '/dashboard', title: 'Servidor ', icon: 'cloud', class: '' },
   { path: '/chuveiro', title: 'Chuveiro', icon: 'shower', class: '' },
 ];
 
@@ -22,9 +22,12 @@ export class SidebarComponent implements OnInit {
   @Output() linkClicado: EventEmitter<string> = new EventEmitter<string>();
   menuItems!: any[];
 
-  constructor() { }
+  constructor() {
+    this.menuItems = [];
+   }
 
   ngOnInit() {
+    this.menuItems = [];
     this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
 

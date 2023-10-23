@@ -1,0 +1,74 @@
+/* Estilo para ocultar os ícones por padrão */
+.chart-icons {
+    position: relative;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    transition: opacity 0.5s, top 0.5s;
+  }
+  
+  /* Estilo para fazer a transição do card-header quando o mouse passa sobre ele */
+  #card-header:hover {
+    transform: translateY(-10px);
+  }
+  
+  /* Estilo para mostrar os ícones quando o mouse está sobre #card-header */
+  #card-header:hover .chart-icons {
+    opacity: 1;
+    top: 70px; /* Ajuste a altura desejada para posicionar os ícones */
+  }
+  .style-icon-load-edit {
+    color: #726a6a;
+  }
+
+  /* Estilo para o gráfico de pizza */
+.ct-chart.pie {
+  height: 300px;
+}
+
+
+
+
+/* Estilo para o ícone de edição */
+.chart-icons i.edit-icon {
+  display: none; /* Inicialmente oculto */
+  font-size: 24px;
+  cursor: pointer;
+  color: #2196F3; /* Cor do ícone de edição */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* Estilo para o ícone de recarregamento */
+.chart-icons i.reload-icon {
+  display: none; /* Inicialmente oculto */
+  font-size: 24px;
+  cursor: pointer;
+  color: #4CAF50; /* Cor do ícone de recarregamento */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* Estilo para o contêiner do gráfico e ícones */
+.ct-chart-container {
+  position: relative;
+}
+
+/* Quando o mouse passa por cima do gráfico */
+.ct-chart:hover + .chart-icons i {
+  display: block; /* Exibe os ícones de edição e recarregamento */
+}
+
+/* Estilo para o gráfico de pizza */
+.ct-chart.pie {
+  height: 800px; /* Aumente a altura conforme necessário */
+}
+

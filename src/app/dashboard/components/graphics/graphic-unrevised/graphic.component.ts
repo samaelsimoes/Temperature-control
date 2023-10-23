@@ -6,7 +6,7 @@ import * as Chartist from 'chartist';
 */
 
 @Component({
-  selector: 'app-graphic',
+  selector: 'app-graphic-danger',
   templateUrl: './graphic.component.html',
   styleUrls: ['./graphic.component.scss']
 })
@@ -17,7 +17,7 @@ export class GraphicComponent implements OnInit {
   desc;
   icon;
 
-  constructor( ) { }
+  constructor() { }
 
   ngOnInit() {
     this.paramGraphic = this.param[0];
@@ -25,9 +25,8 @@ export class GraphicComponent implements OnInit {
     this.desc = this.param[0].desc;
     this.icon = this.param[0].icon;
 
-    debugger;
-     /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
-     const dataDailySalesChart: any = {
+    /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
+    const dataDailySalesChart: any = {
       labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
       series: [
         [12, 17, 7, 17, 23, 18, 38]
@@ -43,16 +42,16 @@ export class GraphicComponent implements OnInit {
       chartPadding: { top: 0, right: 0, bottom: 0, left: 0 },
     }
 
-    const dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
+    const dailySalesChart = new Chartist.Line('#gastoImprevistos', dataDailySalesChart, optionsDailySalesChart);
     this.startAnimationForLineChart(dailySalesChart);
 
     /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
-    const dataCompletedTasksChuveiro: any = {
+    const dataCompletedTasks: any = {
       labels: this.param[0].labels,
       series: this.param[0].series
     };
 
-    const optionsCompletedTasksChuveiro: any = {
+    const optionsCompletedTasks: any = {
       lineSmooth: Chartist.Interpolation.cardinal({
         tension: 0
       }),
@@ -61,7 +60,7 @@ export class GraphicComponent implements OnInit {
       chartPadding: { top: 0, right: 0, bottom: 0, left: 0 }
     }
 
-    const consumoMensal = new Chartist.Line('#consumoMensal', dataCompletedTasksChuveiro, optionsCompletedTasksChuveiro);
+    const consumoMensal = new Chartist.Line('#gastoImprevistos', dataCompletedTasks, optionsCompletedTasks);
 
     // start animation for the Completed Tasks Chart - Line Chart
     this.startAnimationForLineChart(consumoMensal);
