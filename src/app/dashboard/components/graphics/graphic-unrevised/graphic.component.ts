@@ -56,7 +56,7 @@ export class GraphicComponent implements OnInit {
         tension: 0
       }),
       low: 0,
-      high: 1000, // : we recommend you to set the high sa the biggest value + something for a better look
+      high: 50, // : we recommend you to set the high sa the biggest value + something for a better look
       chartPadding: { top: 0, right: 0, bottom: 0, left: 0 }
     }
 
@@ -76,8 +76,8 @@ export class GraphicComponent implements OnInit {
       if (data.type === 'line' || data.type === 'area') {
         data.element.animate({
           d: {
-            begin: 600,
-            dur: 7900,
+            begin: 45,
+            dur: 50,
             from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
             to: data.path.clone().stringify(),
             easing: Chartist.Svg.Easing.easeOutQuint
@@ -104,8 +104,8 @@ export class GraphicComponent implements OnInit {
     let seq2: any, delays2: any, durations2: any;
 
     seq2 = 0;
-    delays2 = 80;
-    durations2 = 500;
+    delays2 = 40;
+    durations2 = 50;
     chart.on('draw', function (data: any) {
       if (data.type === 'bar') {
         seq2++;

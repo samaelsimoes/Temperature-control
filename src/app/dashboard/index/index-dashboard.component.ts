@@ -14,7 +14,7 @@ export class IndexDashboardComponent implements OnInit {
     private _router: Subscription;
     private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
-    linkClicado = '/dashboard';
+    linkClicado = '/chuveiro';
 
     constructor(
         public location: Location, private router: Router,
@@ -23,7 +23,7 @@ export class IndexDashboardComponent implements OnInit {
 
 
     ngOnInit() {
-        this.linkClicado = '/dashboard';
+        this.linkClicado = '/chuveiro';
 
         const isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
