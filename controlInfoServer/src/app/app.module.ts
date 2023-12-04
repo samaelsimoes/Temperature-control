@@ -7,10 +7,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashBoardModule } from './dashboard/dashboard.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpClientModule } from '@angular/common/http';
+import { ModalAnimations } from './components/modalLoad/modal-animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    ModalAnimations
   ],
   imports: [
     BrowserAnimationsModule,
@@ -19,7 +25,10 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    DashBoardModule
+    DashBoardModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
