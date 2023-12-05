@@ -1,7 +1,9 @@
 from flask import render_template, request, redirect, url_for, session, jsonify
 from login_app import app  # Importe o objeto app diretamente, sem criar uma nova instância
-
+from datetime import datetime, timedelta
 import secrets
+import os
+import csv
 
 users = {
     'admin': 'admin',
@@ -35,7 +37,7 @@ def login():
         else:
             return jsonify({'status': 'error', 'message': 'Credenciais inválidas'})
 
-    elif request.method == 'GET':
+    elif request.method == 'GET':   
         # Lógica de autenticação para método GET
         username = request.args.get('username')
         password = request.args.get('password')
@@ -57,3 +59,35 @@ def dashboard_page():
         return f"Bem-vindo à página do dashboard, {session['username']}!"
     else:
         return redirect(url_for('login'))
+
+@app.route('/consumo_chuveiro', methods=['GET'])
+def consumo_chuveiro():
+    # Parâmetros da requisição
+    data_inicio_str = request.args.get('data_inicio', '2023-01-01')
+    data_fim_str = request.args.get('data_fim', '2023-12-31')
+
+    # Converter strings de data para objetos datetime
+    data_inicio = datetime.strptime(data_inicio_str, '%Y-%m-%d')
+    data_fim = datetime.strptime(data_fim_str, '%Y-%m-%d')
+
+    # Verificar se o arquivo CSV existe
+    nome_arquivo = 'dados_chuveiros.csv'
+    if not os.path.exists(nome_arquivo):
+        return jsonify({'status': 'error', 'message': 'Arquivo de dados não encontrado'})
+
+    # Ler dados do arquivo CSV dentro do intervalo de datas fornecido
+    with open(nome_arquivo, mode='r') as file:
+        reader = csv.DictReader(file)
+        dados_consumo = [
+            row for row in reader
+            if data_inicio <= datetime.strptime(row['data'], '%Y-%m-%d') <= data_fim
+        ]
+
+    # Criar um JSON de resposta
+    response_data = {
+        'status': 'success',
+        'message': f'Dados de consumo para todos os chuveiros no intervalo de {data_inicio_str} a {data_fim_str}:',
+        'consumo_chuveiro': dados_consumo
+    }
+
+    return jsonify(response_data)
