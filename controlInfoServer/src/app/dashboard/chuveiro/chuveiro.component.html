@@ -7,11 +7,9 @@
         </div>
         <div class="row">            
             <div class="col-md-6">
-                <app-graphic-success [param]="paramGraphicDiario"> </app-graphic-success>
+                <app-graphic-success *ngIf="paramGraphicDiario" [param]="paramGraphicDiario"></app-graphic-success>
             </div>
-            <div class="col-md-6">
-                <app-graphic-danger [param]="param"> </app-graphic-danger>
-            </div>
+           
         </div>
     </div>
   </div>

@@ -7,45 +7,31 @@ import * as Chartist from 'chartist';
   styleUrls: ['./graphic-success.component.css']
 })
 export class GraphicSuccessComponent implements OnInit {
-
   @Input() param: any;
   paramGraphic;
   title;
   desc;
   icon;
+  currentPage = 1;
+  itemsPerPage = 10;
 
-  constructor( ) { }
+  constructor() { }
 
   ngOnInit() {
-    this.paramGraphic = this.param[0];
+    this.updateChartData();
+  }
+
+  updateChartData() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    const currentPageLabels = this.param[0].labels.slice(startIndex, endIndex);
+    const currentPageSeries = [this.param[0].series[0].slice(startIndex, endIndex)];
     this.title = this.param[0].title;
     this.desc = this.param[0].desc;
     this.icon = this.param[0].icon;
-
-     /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
-     const dataDailySalesChart: any = {
-      labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-      series: [
-        [12, 17, 7, 17, 23, 18, 38]
-      ]
-    };
-
-    const optionsDailySalesChart: any = {
-      lineSmooth: Chartist.Interpolation.cardinal({
-        tension: 0
-      }),
-      low: 0,
-      high: 300, // : we recommend you to set the high sa the biggest value + something for a better look
-      chartPadding: { top: 0, right: 0, bottom: 0, left: 0 },
-    }
-
-    const dailySalesChart = new Chartist.Line('#consumoMensal', dataDailySalesChart, optionsDailySalesChart);
-    this.startAnimationForLineChart(dailySalesChart);
-
-    /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
     const dataCompletedTasks: any = {
-      labels: this.param[0].labels,
-      series: this.param[0].series
+      labels: currentPageLabels,
+      series: currentPageSeries
     };
 
     const optionsCompletedTasks: any = {
@@ -53,13 +39,22 @@ export class GraphicSuccessComponent implements OnInit {
         tension: 0
       }),
       low: 0,
-      high: 1000, // : we recommend you to set the high sa the biggest value + something for a better look
-      chartPadding: { top: 0, right: 0, bottom: 0, left: 0 }
+      high: 25,
+      axisX: {
+        labelInterpolationFnc: function (value, index) {
+          return index % 2 === 0 ? value : null;
+        }
+      },
+      chartPadding: { top: 0, right: 20, bottom: 0, left: 20 }
+    };
+
+    const existingChart = document.getElementById('consumoMensal');
+    if (existingChart) {
+      existingChart.innerHTML = '';
     }
 
     const consumoMensal = new Chartist.Line('#consumoMensal', dataCompletedTasks, optionsCompletedTasks);
 
-    // start animation for the Completed Tasks Chart - Line Chart
     this.startAnimationForLineChart(consumoMensal);
   }
 
@@ -95,29 +90,18 @@ export class GraphicSuccessComponent implements OnInit {
     });
 
     seq = 0;
-  };
+  }
 
-  startAnimationForBarChart(chart: any) {
-    let seq2: any, delays2: any, durations2: any;
+  nextPage() {
+    this.currentPage++;
+    this.updateChartData();
+  }
 
-    seq2 = 0;
-    delays2 = 80;
-    durations2 = 500;
-    chart.on('draw', function (data: any) {
-      if (data.type === 'bar') {
-        seq2++;
-        data.element.animate({
-          opacity: {
-            begin: seq2 * delays2,
-            dur: durations2,
-            from: 0,
-            to: 1,
-            easing: 'ease'
-          }
-        });
-      }
-    });
-
-    seq2 = 0;
-  };
+  prevPage() {
+    this.currentPage--;
+    if (this.currentPage < 1) {
+      this.currentPage = 1;
+    }
+    this.updateChartData();
+  }
 }

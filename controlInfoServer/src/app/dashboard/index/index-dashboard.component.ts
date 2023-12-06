@@ -24,7 +24,6 @@ export class IndexDashboardComponent implements OnInit {
 
     ngOnInit() {
         this.linkClicado = '/chuveiro';
-
         const isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
         if (isWindows && !document.getElementsByTagName('body')[0].classList.contains('sidebar-mini')) {
@@ -32,12 +31,14 @@ export class IndexDashboardComponent implements OnInit {
         } else {
             document.getElementsByTagName('body')[0].classList.remove('perfect-scrollbar-off');
         }
+
         const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');
         const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
 
         this.location.subscribe((ev: PopStateEvent) => {
             this.lastPoppedUrl = ev.url;
         });
+
         this.router.events.subscribe((event: any) => {
             if (event instanceof NavigationStart) {
                 if (event.url !== this.lastPoppedUrl) {
@@ -71,7 +72,6 @@ export class IndexDashboardComponent implements OnInit {
             if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
                 $('.fixed-plugin .dropdown').addClass('open');
             }
-
         }
 
         $('.fixed-plugin a').click(function (event) {
@@ -140,6 +140,7 @@ export class IndexDashboardComponent implements OnInit {
             return true;
         }
     }
+
     runOnRouteChange(): void {
         if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
             const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');
@@ -147,6 +148,7 @@ export class IndexDashboardComponent implements OnInit {
             ps.update();
         }
     }
+
     isMac(): boolean {
         let bool = false;
         if (navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.platform.toUpperCase().indexOf('IPAD') >= 0) {
