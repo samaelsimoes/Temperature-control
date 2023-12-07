@@ -162,3 +162,31 @@ def analise_preditiva():
     }
 
     return jsonify(response_data)
+
+@app.route('/dados_iot', methods=['POST'])
+def dados_iot():
+    # Certifique-se de que o cabeçalho Content-Type é application/json
+    if request.headers['Content-Type'] == 'application/json':
+        # Obtenha os dados do corpo da solicitação como um dicionário JSON
+        dados_iot = request.json
+
+        # Certifique-se de que os campos obrigatórios estão presentes nos dados_iot
+        campos_obrigatorios = ['id', 'data', 'consumo', 'potencia', 'tempo_ligado']
+        for campo in campos_obrigatorios:
+            if campo not in dados_iot:
+                return jsonify({'status': 'error', 'message': f'O campo obrigatório {campo} está ausente'}), 400
+
+        # Realize o processamento necessário com os dados_iot
+        # Neste ponto, você pode armazenar os dados no banco de dados, realizar análises, etc.
+
+        # Adicione os dados ao arquivo CSV
+        with open('dados_iot.csv', mode='a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow([dados_iot.get(campo, '') for campo in campos_obrigatorios])
+
+        # Retorne uma resposta JSON
+        return jsonify({'status': 'success', 'message': 'Dados IoT recebidos e registrados com sucesso'})
+
+    else:
+        # Se o Content-Type não for application/json, retorne um erro
+        return jsonify({'status': 'error', 'message': 'O Content-Type deve ser application/json'}), 415
