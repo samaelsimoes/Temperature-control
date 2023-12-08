@@ -28,4 +28,4 @@ model = MLPRegressor(random_state=42)
 model.fit(X_train, y_train)
 
 # Salvar o modelo treinado
-joblib.dump(model, 'modelo_analise_preditiva.joblib')
+joblib.dump(model, r"C:\Users\david\Documents\login_page\Temperature-control\login_app\modelo_analise_preditiva.joblib")
