@@ -163,12 +163,17 @@ def analise_preditiva():
 
     return jsonify(response_data)
 
-@app.route('/dados_iot', methods=['POST'])
+from flask import request
+
+@app.route('/dados_iot', methods=['POST', 'GET'])
 def dados_iot():
     # Certifique-se de que o cabeçalho Content-Type é application/json
-    if request.headers['Content-Type'] == 'application/json':
+    if request.method == 'POST' and request.headers['Content-Type'] == 'application/json':
         # Obtenha os dados do corpo da solicitação como um dicionário JSON
         dados_iot = request.json
+
+        # Obtenha parâmetros da query string
+        parametro_query = request.args.get('parametro_query')
 
         # Certifique-se de que os campos obrigatórios estão presentes nos dados_iot
         campos_obrigatorios = ['id', 'data', 'consumo', 'potencia', 'tempo_ligado']
@@ -185,7 +190,17 @@ def dados_iot():
             writer.writerow([dados_iot.get(campo, '') for campo in campos_obrigatorios])
 
         # Retorne uma resposta JSON
-        return jsonify({'status': 'success', 'message': 'Dados IoT recebidos e registrados com sucesso'})
+        return jsonify({'status': 'success', 'message': 'Dados IoT recebidos e registrados com sucesso', 'parametro_query': parametro_query})
+
+    elif request.method == 'GET':
+        # Obtenha parâmetros da query string
+        parametro_query = request.args.get('parametro_query')
+
+        # Realize o processamento necessário com os parâmetros da query string
+        # ...
+
+        # Retorne uma resposta JSON
+        return jsonify({'status': 'success', 'message': 'Requisição GET bem-sucedida', 'parametro_query': parametro_query})
 
     else:
         # Se o Content-Type não for application/json, retorne um erro
