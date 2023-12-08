@@ -22,3 +22,15 @@
   .style-icon-load-edit {
     color: #726a6a;
   }
+
+  .material-icons.edit-icon:hover {
+    /* Estilos para o ícone 'navigate_before' quando o mouse está sobre ele */
+    /* Por exemplo, alterar a cor do texto */
+    color: red;
+  }
+  
+  .material-icons.reload-icon:hover {
+    /* Estilos para o ícone 'navigate_next' quando o mouse está sobre ele */
+    /* Por exemplo, alterar a cor do texto */
+    color: blue;
+  }

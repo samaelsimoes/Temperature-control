@@ -14,6 +14,7 @@ export class GraphicSuccessComponent implements OnInit {
   icon;
   currentPage = 1;
   itemsPerPage = 10;
+  isMouseOver: string | null = null;
 
   constructor() { }
 
@@ -29,6 +30,7 @@ export class GraphicSuccessComponent implements OnInit {
     this.title = this.param[0].title;
     this.desc = this.param[0].desc;
     this.icon = this.param[0].icon;
+
     const dataCompletedTasks: any = {
       labels: currentPageLabels,
       series: currentPageSeries

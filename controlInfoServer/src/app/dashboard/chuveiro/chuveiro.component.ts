@@ -16,8 +16,7 @@ export class ChuveiroFileComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private serviceDashBoard: ServiceDashBoard,
-  ) {
-  }
+  ) { }
 
   dadosChuveiro() {
     const info = '?data_inicio=2023-05-01&data_fim=2023-06-01';
@@ -31,10 +30,10 @@ export class ChuveiroFileComponent implements OnInit {
             consumption: Math.ceil(parseFloat(item.consumo)), // Arredondar para cima
           };
         });
-    
+
         // Limitar a 10 itens
         const limitedData = dataFormatted.slice(0, 1000);
-    
+
         // Criar o array final no formato desejado com apenas 10 itens
         this.paramGraphicDiario = [
           {
@@ -49,14 +48,13 @@ export class ChuveiroFileComponent implements OnInit {
             desc: 'valores diarios'
           },
         ];
-    
         console.log(this.paramGraphicDiario);
       },
       (error: any) => {
         // Lida com erros, se necessário
         console.error(error);
       }
-    );;
+    );
   }
 
   ngOnInit() {
