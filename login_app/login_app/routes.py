@@ -8,6 +8,7 @@ import tensorflow as tf
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 import joblib
+from collections import defaultdict
 
 users = {
     'admin': 'admin',
@@ -148,37 +149,62 @@ def analise_preditiva():
     
     data_inicio_str = request.args.get('data_inicio', '2023-01-01')
     data_fim_str = request.args.get('data_fim', '2023-12-31')
-
     # Ler dados do arquivo CSV
     with open('dados_chuveiros.csv', mode='r') as file:
         reader = csv.DictReader(file)
-        dados_consumo = [float(row['consumo']) for row in reader]
+        dados_consumo = [
+            {
+                'data': row.get('data', ''),
+                'potencia': row.get('potencia', ''),
+                'consumo': row.get('consumo', ''),
+                'tempo_ligado': row.get('tempo_ligado', ''),
+            }
+            for row in reader
+        ]
 
-    # Prever o consumo para o próximo mês
-    predicoes = []
-    for i in range(1):  # Próximo mês
-        # Gerar a data para o próximo mês
-        data_prevista = datetime.strptime(data_fim_str, '%Y-%m-%d') + timedelta(days=1)
+    # Calcular totais diários
+    total_potencia_diario = defaultdict(float)
+    total_consumo_diario = defaultdict(float)
+    total_tempo_ligado_diario = defaultdict(int)
 
-        # Use a potência do último registro (supondo que a potência é constante)
-        potencia = float(dados_consumo[-1])
+    for dado in dados_consumo:
+        data = dado['data']
+        
+        # Potência
+        try:
+            total_potencia_diario[data] += float(dado['potencia'].replace(',', ''))
+        except ValueError:
+            print(f"Erro ao converter valor para float: {dado['potencia']}")
 
-        # Use o modelo treinado para prever o consumo
-        consumo_previsto = modelo_analise_preditiva.predict([[len(dados_consumo) + i]])
+        # Consumo
+        try:
+            total_consumo_diario[data] += float(dado['consumo'].replace(',', ''))
+        except ValueError:
+            print(f"Erro ao converter valor para float: {dado['consumo']}")
 
-        # Adicione as predições à lista
-        predicoes.append({
-            'data': data_prevista.strftime('%Y-%m-%d'),  # Data formatada como string
-            'potencia': str(potencia),  # Potência em string
-            'totalGasto': str(consumo_previsto[0]),  # Valor previsto em string
-            'valor': str(consumo_previsto[0])  # Valor previsto em string
+        # Tempo ligado
+        tempo_ligado_parts = dado['tempo_ligado'].split(' ')
+        horas = int(tempo_ligado_parts[0]) if len(tempo_ligado_parts) > 1 else 0
+        minutos = int(tempo_ligado_parts[-2]) if len(tempo_ligado_parts) > 3 else 0
+        total_tempo_ligado_diario[data] += horas * 60 + minutos
+
+    # Converte os dados em uma lista
+    lista_dados_diarios = []
+    for data, potencia in total_potencia_diario.items():
+        consumo = total_consumo_diario.get(data, 0)
+        tempo_ligado = total_tempo_ligado_diario.get(data, 0)
+        lista_dados_diarios.append({
+            'data': data,
+            'totalPotencia': str(potencia),
+            'totalConsumo': str(consumo),
+            'totalTempoLigado': str(tempo_ligado),
         })
 
     # Crie um JSON de resposta
     response_data = {
         'status': 'success',
-        'message': 'Dados de consumo previsto para o próximo mês:',
-        'analisePreditiva': predicoes
+        'message': 'Totais diários:',
+        'analisePreditiva': lista_dados_diarios
     }
 
     return jsonify(response_data)

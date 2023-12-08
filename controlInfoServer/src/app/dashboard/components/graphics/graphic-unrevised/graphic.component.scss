@@ -22,3 +22,29 @@
   .style-icon-load-edit {
     color: #726a6a;
   }
+
+    /* Estilo para fazer a transição do card-header quando o mouse passa sobre ele */
+    #card-header:hover {
+      transform: translateY(-10px);
+    }
+    
+    /* Estilo para mostrar os ícones quando o mouse está sobre #card-header */
+    #card-header:hover .chart-icons {
+      opacity: 1;
+      top: 70px; /* Ajuste a altura desejada para posicionar os ícones */
+    }
+    .style-icon-load-edit {
+      color: #726a6a;
+    }
+  
+    .material-icons.edit-icon:hover {
+      /* Estilos para o ícone 'navigate_before' quando o mouse está sobre ele */
+      /* Por exemplo, alterar a cor do texto */
+      color: red;
+    }
+    
+    .material-icons.reload-icon:hover {
+      /* Estilos para o ícone 'navigate_next' quando o mouse está sobre ele */
+      /* Por exemplo, alterar a cor do texto */
+      color: blue;
+    }

@@ -2,12 +2,15 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
-                <app-cards [dataCenterInfo]="paramChuveiro"></app-cards>
+                <app-cards *ngIf="paramCard" [dataCenterInfo]="paramCard"></app-cards>
             </div>   
         </div>
         <div class="row">            
             <div class="col-md-6">
                 <app-graphic-success *ngIf="paramGraphicDiario" [param]="paramGraphicDiario"></app-graphic-success>
+            </div>           
+            <div class="col-md-6">
+                <app-graphic-danger *ngIf="paramGraphicDiario" [param]="paraGraphicMetricas"></app-graphic-danger>
             </div>           
         </div>
     </div>

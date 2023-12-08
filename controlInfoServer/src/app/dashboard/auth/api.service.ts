@@ -16,7 +16,10 @@ export class ServiceDashBoard {
         this.link = this.url.getApiUrl();
     }
 
-    getApis(param: string) {
+    getApisConsumoChuveiro(param: string) {
         return this.http.get<any>(`${this.link}/consumo_chuveiro`);
+    }
+    getApisAnalisePreditiva(param: string) {
+        return this.http.get<any>(`${this.link}/analise_preditiva`);
     }
 }

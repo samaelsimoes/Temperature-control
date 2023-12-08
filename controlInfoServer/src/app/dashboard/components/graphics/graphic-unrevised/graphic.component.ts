@@ -1,10 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
 
-/*
-  ------------------------------------= DOC DOCUMENT https://gionkunz.github.io/chartist-js/ =------------------------------------
-*/
-
 @Component({
   selector: 'app-graphic-danger',
   templateUrl: './graphic.component.html',
@@ -12,72 +8,75 @@ import * as Chartist from 'chartist';
 })
 export class GraphicComponent implements OnInit {
   @Input() param: any;
-  paramGraphic;
   title;
   desc;
   icon;
 
+  currentPage = 1;
+  itemsPerPage = 10;
   constructor() { }
 
   ngOnInit() {
-    this.paramGraphic = this.param[0];
+    this.updateChartData();
+  }
+
+  updateChartData() {
+    if (!this.param || !this.param[0]) {
+        // Adicione um tratamento para quando 'this.param' ou 'this.param[0]' for undefined
+        console.error('Dados de gráfico não disponíveis.');
+        return;
+    }
+
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    const currentPageLabels = this.param[0].labels?.slice(startIndex, endIndex) || [];
+    const currentPageSeries = this.param[0].series?.map(serie => serie.slice(startIndex, endIndex)) || [];
     this.title = this.param[0].title;
     this.desc = this.param[0].desc;
     this.icon = this.param[0].icon;
 
-    /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
-    const dataDailySalesChart: any = {
-      labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-      series: [
-        [12, 17, 7, 17, 23, 18, 38]
-      ]
-    };
-
-    const optionsDailySalesChart: any = {
-      lineSmooth: Chartist.Interpolation.cardinal({
-        tension: 0
-      }),
-      low: 0,
-      high: 300, // : we recommend you to set the high sa the biggest value + something for a better look
-      chartPadding: { top: 0, right: 0, bottom: 0, left: 0 },
-    }
-
-    const dailySalesChart = new Chartist.Line('#gastoImprevistos', dataDailySalesChart, optionsDailySalesChart);
-    this.startAnimationForLineChart(dailySalesChart);
-
-    /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
     const dataCompletedTasks: any = {
-      labels: this.param[0].labels,
-      series: this.param[0].series
+        labels: currentPageLabels,
+        series: currentPageSeries
     };
+
 
     const optionsCompletedTasks: any = {
       lineSmooth: Chartist.Interpolation.cardinal({
         tension: 0
       }),
       low: 0,
-      high: 50, // : we recommend you to set the high sa the biggest value + something for a better look
-      chartPadding: { top: 0, right: 0, bottom: 0, left: 0 }
+      high: 6000,
+      axisX: {
+        labelInterpolationFnc: function (value, index) {
+          return index % 2 === 0 ? value : null;
+        }
+      },
+      chartPadding: { top: 0, right: 20, bottom: 0, left: 20 }
+    };
+
+    const existingChart = document.getElementById('gastoImprevistos');
+    if (existingChart) {
+      existingChart.innerHTML = '';
     }
 
     const consumoMensal = new Chartist.Line('#gastoImprevistos', dataCompletedTasks, optionsCompletedTasks);
 
-    // start animation for the Completed Tasks Chart - Line Chart
     this.startAnimationForLineChart(consumoMensal);
   }
 
   startAnimationForLineChart(chart: any) {
     let seq: any, delays: any, durations: any;
     seq = 0;
-    delays = 80;
+    delays = 980;
     durations = 500;
 
     chart.on('draw', function (data: any) {
       if (data.type === 'line' || data.type === 'area') {
         data.element.animate({
           d: {
-            begin: 45,
-            dur: 50,
+            begin: 600,
+            dur: 7900,
             from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
             to: data.path.clone().stringify(),
             easing: Chartist.Svg.Easing.easeOutQuint
@@ -98,29 +97,18 @@ export class GraphicComponent implements OnInit {
     });
 
     seq = 0;
-  };
+  }
 
-  startAnimationForBarChart(chart: any) {
-    let seq2: any, delays2: any, durations2: any;
+  nextPage() {
+    this.currentPage++;
+    this.updateChartData();
+  }
 
-    seq2 = 0;
-    delays2 = 40;
-    durations2 = 50;
-    chart.on('draw', function (data: any) {
-      if (data.type === 'bar') {
-        seq2++;
-        data.element.animate({
-          opacity: {
-            begin: seq2 * delays2,
-            dur: durations2,
-            from: 0,
-            to: 1,
-            easing: 'ease'
-          }
-        });
-      }
-    });
-
-    seq2 = 0;
-  };
+  prevPage() {
+    this.currentPage--;
+    if (this.currentPage < 1) {
+      this.currentPage = 1;
+    }
+    this.updateChartData();
+  }
 }
