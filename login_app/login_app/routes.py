@@ -125,7 +125,7 @@ def consumo_chuveiro():
 @app.route('/analise_preditiva', methods=['GET'])
 def analise_preditiva():
     # Parâmetros da requisição
-    modelo_analise_preditiva = joblib.load(r"C:\Users\david\Documents\login_page\Temperature-control\modelo_analise_preditiva.joblib")
+    modelo_analise_preditiva = joblib.load(r"C:\Users\david\Documents\login_page\Temperature-control\login_app\modelo_analise_preditiva.joblib")
     data_inicio_str = request.args.get('data_inicio', '2023-01-01')
     data_fim_str = request.args.get('data_fim', '2023-12-31')
 
@@ -193,15 +193,9 @@ def dados_iot():
         return jsonify({'status': 'success', 'message': 'Dados IoT recebidos e registrados com sucesso', 'parametro_query': parametro_query})
 
     elif request.method == 'GET':
-        # Obtenha parâmetros da query string
         parametro_query = request.args.get('parametro_query')
-
-        # Realize o processamento necessário com os parâmetros da query string
-        # ...
-
-        # Retorne uma resposta JSON
+        
         return jsonify({'status': 'success', 'message': 'Requisição GET bem-sucedida', 'parametro_query': parametro_query})
 
     else:
-        # Se o Content-Type não for application/json, retorne um erro
         return jsonify({'status': 'error', 'message': 'O Content-Type deve ser application/json'}), 415
